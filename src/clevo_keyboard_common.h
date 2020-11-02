@@ -1,7 +1,7 @@
 /*
-* tuxedo_keyboard_common.h
+* clevo_keyboard_common.h
 *
-* Copyright (C) 2018-2020 TUXEDO Computers GmbH <tux@tuxedocomputers.com>
+* Copyright (C) 2018-2020 CLEVO Computers GmbH <tux@clevocomputers.com>
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 * along with this program; if not, write to the Free Software
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
-#ifndef TUXEDO_KEYBOARD_COMMON_H
-#define TUXEDO_KEYBOARD_COMMON_H
+#ifndef CLEVO_KEYBOARD_COMMON_H
+#define CLEVO_KEYBOARD_COMMON_H
 
 #include <linux/module.h>
 #include <linux/kernel.h>
@@ -29,16 +29,16 @@
 #include <linux/input/sparse-keymap.h>
 
 /* ::::  Module specific Constants and simple Macros   :::: */
-#define __TUXEDO_PR(lvl, fmt, ...) do { pr_##lvl(fmt, ##__VA_ARGS__); } while (0)
-#define TUXEDO_INFO(fmt, ...) __TUXEDO_PR(info, fmt, ##__VA_ARGS__)
-#define TUXEDO_ERROR(fmt, ...) __TUXEDO_PR(err, fmt, ##__VA_ARGS__)
-#define TUXEDO_DEBUG(fmt, ...) __TUXEDO_PR(debug, "[%s:%u] " fmt, __func__, __LINE__, ##__VA_ARGS__)
+#define __CLEVO_PR(lvl, fmt, ...) do { pr_##lvl(fmt, ##__VA_ARGS__); } while (0)
+#define CLEVO_INFO(fmt, ...) __CLEVO_PR(info, fmt, ##__VA_ARGS__)
+#define CLEVO_ERROR(fmt, ...) __CLEVO_PR(err, fmt, ##__VA_ARGS__)
+#define CLEVO_DEBUG(fmt, ...) __CLEVO_PR(debug, "[%s:%u] " fmt, __func__, __LINE__, ##__VA_ARGS__)
 
 #ifndef DRIVER_NAME
-#define DRIVER_NAME "tuxedo_keyboard"
+#define DRIVER_NAME "clevo_keyboard"
 #endif
 
-struct tuxedo_keyboard_driver {
+struct clevo_keyboard_driver {
 	// Platform driver provided by driver
 	struct platform_driver *platform_driver;
 	// Probe method provided by driver
@@ -50,11 +50,11 @@ struct tuxedo_keyboard_driver {
 };
 
 // Global module devices
-static struct platform_device *tuxedo_platform_device;
-static struct input_dev *tuxedo_input_device;
+static struct platform_device *clevo_platform_device;
+static struct input_dev *clevo_input_device;
 
 // Currently chosen driver
-static struct tuxedo_keyboard_driver *current_driver;
+static struct clevo_keyboard_driver *current_driver;
 
 /**
  * Basically a copy of the existing report event but doesn't report unknown events

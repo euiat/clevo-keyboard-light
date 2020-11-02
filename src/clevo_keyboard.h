@@ -1,8 +1,6 @@
 /*
 * clevo_keyboard.h
 *
-* Copyright (C) 2018-2020 CLEVO Computers GmbH <tux@clevocomputers.com>
-*
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
 * the Free Software Foundation; either version 2 of the License, or
@@ -58,7 +56,7 @@
 #define WMI_KEYEVENT_CODE_RFKILL1                0x85
 #define WMI_KEYEVENT_CODE_RFKILL2                0x86
 
-struct clevo_keyboard_driver clevo_keyboard_driver;
+struct clevo_keyboard_driver keyboard_driver;
 
 static struct key_entry clevo_wmi_keymap[] = {
 	// Keyboard backlight (RGB versions)
@@ -563,9 +561,9 @@ static void clevo_wmi_notify(u32 value, void *context)
 		break;
 	}
 
-	if (clevo_keyboard_driver.input_device != NULL) {
+	if (keyboard_driver.input_device != NULL) {
 		if (!sparse_keymap_report_known_event(
-			    clevo_keyboard_driver.input_device, key_event, 1,
+			    keyboard_driver.input_device, key_event, 1,
 			    true)) {
 			CLEVO_DEBUG("Unknown key - %d (%0#6x)\n", key_event,
 				     key_event);
@@ -750,7 +748,7 @@ static struct platform_driver platform_driver_clevo = {
 		},
 };
 
-struct clevo_keyboard_driver clevo_keyboard_driver = {
+struct clevo_keyboard_driver keyboard_driver = {
 	.platform_driver = &platform_driver_clevo,
 	.probe = clevo_keyboard_probe,
 	.key_map = clevo_wmi_keymap,

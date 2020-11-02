@@ -23,8 +23,8 @@
 #include "clevo_keyboard_common.h"
 #include "clevo_keyboard.h"
 
-MODULE_AUTHOR("CLEVO Computers GmbH <tux@clevocomputers.com>");
-MODULE_DESCRIPTION("CLEVO Computers keyboard & keyboard backlight Driver");
+MODULE_AUTHOR("euiat <euiat@github.com>");
+MODULE_DESCRIPTION("CLEVO keyboard & keyboard backlight Driver");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("2.0.6");
 
@@ -34,7 +34,7 @@ MODULE_ALIAS("wmi:" CLEVO_GET_GUID);
 MODULE_SOFTDEP("pre: clevo-cc-wmi");
 
 static struct clevo_keyboard_driver *driver_list[] = {
-	&clevo_keyboard_driver
+	&keyboard_driver
 };
 
 static int clevo_input_init(const struct key_entry key_map[])
@@ -86,7 +86,7 @@ static void __exit clevo_input_exit(void)
 	}
 }
 
-static int __init tuxdeo_keyboard_init(void)
+static int __init clevdo_keyboard_init(void)
 {
 	int i, err;
 	int num_drivers = sizeof(driver_list) / sizeof(*driver_list);
@@ -124,7 +124,7 @@ static int __init tuxdeo_keyboard_init(void)
 	return 0;
 }
 
-static void __exit tuxdeo_keyboard_exit(void)
+static void __exit clevdo_keyboard_exit(void)
 {
 	clevo_input_exit();
 
@@ -135,5 +135,5 @@ static void __exit tuxdeo_keyboard_exit(void)
 	CLEVO_DEBUG("exit");
 }
 
-module_init(tuxdeo_keyboard_init);
-module_exit(tuxdeo_keyboard_exit);
+module_init(clevdo_keyboard_init);
+module_exit(clevdo_keyboard_exit);
